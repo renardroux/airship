@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Yair_Yona_-_Russian_Dance.ogg-f41b5c1f31b344b168a90a46b949161c.oggstr"
+
+[deps]
+
+source_file="res://sounds/music/Yair_Yona_-_Russian_Dance.ogg"
+source_md5="f082a2e9e307a8b5c8ffb29a4d399196"
+
+dest_files=[ "res://.import/Yair_Yona_-_Russian_Dance.ogg-f41b5c1f31b344b168a90a46b949161c.oggstr" ]
+dest_md5="b9aea510ffaa8414ee53540f0a5a989d"
+
+[params]
+
+loop=true
+loop_offset=0

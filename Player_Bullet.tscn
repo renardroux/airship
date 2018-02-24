@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player_Bullet.gd" type="Script" id=1]
+[ext_resource path="res://sounds/sfx/NenadSimic - Muffled Distant Explosion.ogg" type="AudioStream" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[node name="Player_Bullet" type="Area2D"]
+
+position = Vector2( 506.358, 286.873 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+__meta__ = {
+"_edit_group_": true
+}
+speed = 500
+
+[node name="Grenade" type="ColorRect" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -3.0
+margin_top = -3.0
+margin_right = 3.0
+margin_bottom = 3.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Material", "Rect", "Visibility" ]
+
+[node name="ExplisionCollision" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+disabled = true
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
+
+[node name="Lifetime" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = false
+autostart = true
+
+[node name="Tween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." index="4"]
+
+stream = ExtResource( 2 )
+volume_db = 0.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
+
+

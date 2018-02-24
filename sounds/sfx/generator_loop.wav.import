@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/generator_loop.wav-bac0e15c3eee4f37da3c06f601c8d3e5.sample"
+
+[deps]
+
+source_file="res://sounds/sfx/generator_loop.wav"
+source_md5="530c64aa631db73091d107f2d4828bcb"
+
+dest_files=[ "res://.import/generator_loop.wav-bac0e15c3eee4f37da3c06f601c8d3e5.sample" ]
+dest_md5="8cba7a86a0e3e5b1622b886b9bd70506"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

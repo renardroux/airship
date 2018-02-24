@@ -1,0 +1,201 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Player_Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/airship2.png" type="Texture" id=3]
+[ext_resource path="res://new_gradient.tres" type="Gradient" id=4]
+[ext_resource path="res://art/smoke.png" type="Texture" id=5]
+[ext_resource path="res://sounds/sfx/generator_loop.wav" type="AudioStream" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 16.44
+height = 91.842
+
+[sub_resource type="Curve" id=2]
+
+min_value = -360.0
+max_value = 360.0
+bake_resolution = 100
+_data = [ Vector2( 0, 255.234 ), 0.0, 0.0, 0, 0, Vector2( 1, -247.5 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+
+flags = 4
+width = 2048
+curve = SubResource( 2 )
+
+[sub_resource type="GradientTexture" id=4]
+
+flags = 4
+gradient = ExtResource( 4 )
+width = 2048
+
+[sub_resource type="Curve" id=5]
+
+min_value = 0.0
+max_value = 2.0
+bake_resolution = 100
+_data = [ Vector2( 0, 0.15625 ), 0.0, -0.807146, 0, 0, Vector2( 1, 0.376953 ), -4.75761, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+
+flags = 4
+width = 2048
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.0
+initial_velocity_random = 0.0
+angular_velocity = 0.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 3 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Angular Velocity", "Color", "Emission Shape", "Hue Variation", "Resource", "Scale" ]
+
+[node name="Player" type="Area2D"]
+
+position = Vector2( 706.734, 315.536 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+ROT_SPEED = 0.5
+THRUST = 300
+MAX_VEL = 250
+FRICTION = 1.5
+bullet = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="." index="0"]
+
+repeat = true
+playback_process_mode = 0
+playback_speed = 1.0
+playback/active = false
+playback/repeat = true
+playback/speed = 1.0
+
+[node name="Ship" type="Sprite" parent="." index="1"]
+
+rotation = 1.5708
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 1 )
+
+[node name="SmokeTrail" type="Particles2D" parent="." index="3"]
+
+show_behind_parent = true
+position = Vector2( -0.323486, 51.8604 )
+rotation = 1.5708
+emitting = false
+amount = 50
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 1.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 7 )
+texture = ExtResource( 5 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Drawing", "Material", "Process Material", "Textures", "Time", "Transform", "Visibility", "Z" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+limit_smoothed = false
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = false
+smoothing_speed = 5.0
+offset_v = 0.0
+offset_h = 0.0
+drag_margin_left = 0.2
+drag_margin_top = 0.2
+drag_margin_right = 0.2
+drag_margin_bottom = 0.2
+editor_draw_screen = true
+editor_draw_limits = false
+editor_draw_drag_margin = false
+
+[node name="EngineSound" type="AudioStreamPlayer" parent="." index="5"]
+
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="Bullet_Container" type="Node" parent="." index="6"]
+
+[node name="Muzzle" type="Position2D" parent="." index="7"]
+
+position = Vector2( 16, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Gun_Timer" type="Timer" parent="." index="8"]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = true
+autostart = false
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+
+
